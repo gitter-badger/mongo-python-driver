@@ -36,6 +36,7 @@ except ImportError:
     _use_c = False
 from pymongo.errors import DocumentTooLarge, InvalidOperation, OperationFailure
 
+from airwoot.mole import *
 
 MAX_INT32 = 2147483647
 MIN_INT32 = -2147483648
@@ -112,6 +113,7 @@ if _use_c:
     insert = _cmessage._insert_message
 
 
+@log_update
 def update(collection_name, upsert, multi,
            spec, doc, safe, last_error_args, check_keys, uuid_subtype):
     """Get an **update** message.
@@ -140,6 +142,7 @@ if _use_c:
     update = _cmessage._update_message
 
 
+@log_query
 def query(options, collection_name, num_to_skip,
           num_to_return, query, field_selector=None,
           uuid_subtype=OLD_UUID_SUBTYPE):
@@ -174,6 +177,7 @@ if _use_c:
     get_more = _cmessage._get_more_message
 
 
+@log_delete
 def delete(collection_name, spec, safe,
            last_error_args, uuid_subtype, options=0):
     """Get a **delete** message.
@@ -278,6 +282,7 @@ if _use_c:
     _do_batched_insert = _cmessage._do_batched_insert
 
 
+@log_batch_operation
 def _do_batched_write_command(namespace, operation, command,
                               docs, check_keys, uuid_subtype, client):
     """Execute a batch of insert, update, or delete commands.
