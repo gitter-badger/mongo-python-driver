@@ -1,5 +1,7 @@
 from bson.son import SON
 from bson.binary import OLD_UUID_SUBTYPE
+from db import add_operation
+
 _INSERT = 0
 _UPDATE = 1
 _DELETE = 2
@@ -7,6 +9,7 @@ _QUERY = 4
 
 def make_redis_record(collection_name, operation, query):
     print "%s[%s] -> %s" % (collection_name, operation, query)
+    add_operation(collection_name, query)
 
 def log_batch_operation(fn):
     op_keys = {
