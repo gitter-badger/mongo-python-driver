@@ -41,10 +41,11 @@ def log_update(fn):
     return inner
 
 def log_query(fn):
-    def inner(options, collection_name, num_to_skip,
+    def inner(options, namespace, num_to_skip,
               num_to_return, query, *args, **kwargs):
 
         if isinstance(query, SON):
+            collection_name = query.values()[0]
             _query = query.to_dict()
             if _query.get("query"):
                 make_redis_record(collection_name, _QUERY, _query["query"])
@@ -54,10 +55,7 @@ def log_query(fn):
                     if q.get("$match"):
                         make_redis_record(collection_name, _QUERY, q["$match"])
 
-        elif isinstance(query, dict):
-            make_redis_record(collection_name, _QUERY, query)
-
-        return fn(options, collection_name, num_to_skip,
+        return fn(options, namespace, num_to_skip,
                   num_to_return, query, *args, **kwargs)
     return inner
 
