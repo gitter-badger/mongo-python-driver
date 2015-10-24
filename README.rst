@@ -121,3 +121,8 @@ nose**) and run **nosetests** or **python setup.py test** in the root
 of the distribution. Tests are located in the *test/* directory.
 
 .. _sphinx: http://sphinx.pocoo.org/
+
+
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Join the chat at https://gitter.im/airwoot/mongo-python-driver
+   :target: https://gitter.im/airwoot/mongo-python-driver?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
